@@ -543,6 +543,7 @@ var YouTubeIframeRenderer = {
 			videoId: videoId,
 			height: height,
 			width: width,
+			host: youtube.options.youtube && youtube.options.youtube.nocookie ? 'https://www.youtube-nocookie.com' : undefined,
 			playerVars: Object.assign({
 				controls: 0,
 				rel: 0,
@@ -1167,8 +1168,10 @@ function getTypeFromFile(url) {
 	var mime = 'video/mp4';
 
 	if (normalizedExt) {
-		if (~['mp4', 'm4v', 'ogg', 'ogv', 'webm', 'flv', 'mpeg', 'mov'].indexOf(normalizedExt)) {
+		if (~['mp4', 'm4v', 'ogg', 'ogv', 'webm', 'flv', 'mpeg'].indexOf(normalizedExt)) {
 			mime = 'video/' + normalizedExt;
+		} else if ('mov' === normalizedExt) {
+			mime = 'video/quicktime';
 		} else if (~['mp3', 'oga', 'wav', 'mid', 'midi'].indexOf(normalizedExt)) {
 			mime = 'audio/' + normalizedExt;
 		}

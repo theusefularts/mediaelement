@@ -205,6 +205,7 @@ Object.assign(MediaElementPlayer.prototype, {
 					// to use, but we want to know when "none" is clicked
 					const keyboard = e.keyCode || e.which;
 					player.setTrack(this.value, (typeof keyboard !== 'undefined'));
+					e.preventDefault();
 				});
 			}
 
